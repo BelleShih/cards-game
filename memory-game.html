@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body{
+            margin: auto;
+        }
+        #game{
+            width: 500px;
+        }
+        .card{
+            width: 90px;
+            height: 45px;
+            transform-style: preserve-3d;
+            position: relative;
+            display: inline-block;
+        }
+        .back{
+            width: 100%;
+            height: 100%;
+            /* background-image: url(./images/back.png); */
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;            
+
+        }
+        .front{
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        
+
+    </div>
+    <script src="./jquery-3.5.1.min.js"></script>
+    <script>
+        const totalCards = 20
+
+        for( let i=0; i<totalCards/2; i++ ) {
+            $('#game').append(`
+            
+            <div class="card">
+                <div class="back"></div>
+                <div class="front"></div>
+            </div>
+
+            <div class="card">
+                <div class="back"></div>
+                <div class="front"></div>
+            </div>
+
+            `)            
+            const number1 =  i % ( totalCards/2 ) + 1
+            const number2 = 
+            $('.card').eq(i).find('.front').css('background-image',`url(./images/a${number}.png)`)
+            $('.card').eq(i).attr('data-card', number)
+
+           
+            $('.card').eq(i+1).find('.front').css('background-image',`url(./images/b${number}.png)`)
+            $('.card').eq(i+1).attr('data-card', number)
+
+        }
+    </script>
+</body>
+</html>
