@@ -20,6 +20,38 @@
             background-color: rgb(219, 211, 184); 
             font-family: 'Noto Sans TC', sans-serif;   
         }
+        #btn-easy{
+            position: absolute;
+            left: 3%;
+            top: 60%;
+            width: 200px;
+            height: 40px;
+            letter-spacing: 5px;
+            font: 15px;
+            background: rgb(238, 213, 185);
+            color: rgb(126, 102, 79);
+            border: 0;
+        }
+        #btn-easy:hover{
+            background: rgb(126, 102, 79);
+            color: rgb(238, 213, 185);
+        }
+        #btn-hard{
+            position: absolute;
+            left: 3%;
+            top: 70%;
+            width: 200px;
+            height: 40px;
+            letter-spacing: 5px;
+            font: 15px;
+            background: rgb(238, 213, 185);
+            color: rgb(126, 102, 79);
+            border: 0;
+        }
+        #btn-hard:hover{
+            background: rgb(126, 102, 79);
+            color: rgb(238, 213, 185);
+        }
         #game{
             width: 600px;
             margin: auto;
@@ -59,7 +91,19 @@
         .back{
             width: 100%;
             height: 100%;
-            background-image: url(./images/back.png);            
+            background-image: url(./images/easy/back.png);            
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;  
+            position: absolute;
+            transform: rotateX(180deg); 
+            backface-visibility: hidden;         
+
+        }
+        .back-h{
+            width: 100%;
+            height: 100%;
+            background-image: url(./images/hard/back.png);            
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;  
@@ -136,6 +180,16 @@
             position: absolute;
             transition: all 0.8S;
         }
+        .alert-card{
+            width: 600px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
     </style>
 </head>
 <body>
@@ -143,19 +197,24 @@
         <div id="border"></div>
         <div id="game">       
 
-        </div>        
+        </div>
+         
+        <input type="button" value="基礎入門" id="btn-easy">
+        <input type="button" value="進階學習" id="btn-hard">       
         <div id="logo"></div>
     </div>  
 
-    <div id="answer" class="animate__animated animate__zoomIn">       
-    <div id="alert"></div>
-    </div>
+    <div id="answer" class="animate__animated animate__zoomIn">     
     
+    </div>
+    <div id="alert"></div>
     <script src="./jquery-3.5.1.min.js"></script>
     <script>
         const totalCards = 20
-
-
+// 簡易版
+    $('#btn-easy').on('click', function(){
+    
+        $('#btn-easy').attr('disabled', true);
         for( let i=0; i < totalCards/2; i++ ) {
             $('#game').append(`
             
@@ -170,13 +229,13 @@
            
             `)            
             const number1 =  i + 1            
-            $('.card').eq(i).find('.front').css('background-image',`url(./images/a${number1}.png)`)
+            $('.card').eq(i).find('.front').css('background-image',`url(./images/easy/a${number1}.png)`)
             $('.card').eq(i).attr('data-card', number1)  
         }
 
          for( let i=0; i < totalCards/2; i++ ) {
             const number2 =  i + 11              
-             $('.card').eq(number2-1).find('.front').css('background-image',`url(./images/b${number2-10}.png)`)
+             $('.card').eq(number2-1).find('.front').css('background-image',`url(./images/easy/b${number2-10}.png)`)
              $('.card').eq(number2-1).attr('data-card', number2-10)
     
             const random1 = Math.floor( Math.random() * number2-1 )
@@ -194,7 +253,7 @@
                     $('.card:not(.close)').fadeTo(800, 0).addClass('clear')
                         setTimeout(() => {
                             $('#answer').append(`
-                                <div class="answercard" style="background-image:url(./images/c${ $('.card:not(.close)').eq(0).attr('data-card') }.png)"></div>
+                                <div class="answercard" style="background-image:url(./images/easy/c${ $('.card:not(.close)').eq(0).attr('data-card') }.png)"></div>
                                 <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
                             `)
                             $('#ans-btn').on('click', function(){
@@ -210,13 +269,85 @@
 
             if( $('.clear').length == totalCards) {
                 setTimeout(() => {
-                    $('#alert').append(`
-                                <div class="clearcard" style="background-image:url(./images/alert.png)"></div>
+                    alert('恭喜你完成所有挑戰！')
+                    $('.card').remove()
+                    $('.close').remove()
+                    $('.clear').remove()
+                    $('#btn-easy').attr('disabled', false);
+                } ,2000);
+            }
+        }) 
+    }) 
+
+// 困難版
+    $('#btn-hard').on('click', function(){
+    
+        $('#btn-hard').attr('disabled', true);
+        $('#btn-easy').attr('disabled', true);
+        for( let i=0; i < totalCards/2; i++ ) {
+            $('#game').append(`
+            
+                <div class="card close">
+                    <div class="back-h"></div>
+                    <div class="front"></div>
+                </div>
+                <div class="card close">
+                    <div class="back-h"></div>
+                    <div class="front"></div>
+                </div>
+           
+            `)            
+            const number1 =  i + 1            
+            $('.card').eq(i).find('.front').css('background-image',`url(./images/hard/a${number1}.png)`)
+            $('.card').eq(i).attr('data-card', number1)  
+        }
+
+         for( let i=0; i < totalCards/2; i++ ) {
+            const number2 =  i + 11              
+             $('.card').eq(number2-1).find('.front').css('background-image',`url(./images/hard/b${number2-10}.png)`)
+             $('.card').eq(number2-1).attr('data-card', number2-10)
+    
+            const random1 = Math.floor( Math.random() * number2-1 )
+             $('.card').eq(random1).insertAfter($('.card').eq(number2-1))
+        }
+
+        $('#game').on('click', '.card', function(){
+            if( $('.card:not(.close)').length < 2 ) {
+                $(this).removeClass('close')
+            }
+
+            if( $('.card:not(.close)').length == 2 ) {
+                if( $('.card:not(.close)').eq(0).attr('data-card') == $('.card:not(.close)').eq(1).attr('data-card') ) {
+                    $('.card:not(.close)').css( 'filter', 'hue-rotate(-180deg)' )
+                    $('.card:not(.close)').fadeTo(800, 0).addClass('clear')
+                        setTimeout(() => {
+                            $('#answer').append(`
+                                <div class="answercard" style="background-image:url(./images/hard/c${ $('.card:not(.close)').eq(0).attr('data-card') }.png)"></div>
                                 <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
                             `)
-                } ,1000);
+                            $('#ans-btn').on('click', function(){
+                                $('.answercard').remove()
+                                $('#ans-btn').remove()
+                            })
+                        }, 1000);
+                }
+                setTimeout(() => {
+                    $('.card:not(.close)').addClass('close') 
+                } ,1000);                
             }
-        })        
+
+            if( $('.clear').length == totalCards) {
+                setTimeout(() => {
+                    alert('恭喜你完成所有挑戰！')
+                    $('.card').remove()
+                    $('.close').remove()
+                    $('.clear').remove()
+                    $('#btn-easy').attr('disabled', false);
+                    $('#btn-hard').attr('disabled', false);
+                } ,2000);
+            }
+        }) 
+    })             
         
     </script>
 </body>
