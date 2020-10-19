@@ -21,17 +21,28 @@
             font-family: 'Noto Sans TC', sans-serif;   
         }
         #game{
-            width: 1000px;
+            width: 680px;
             margin: 0;
             position: relative;
             
+        }
+        #bg{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;   
+            margin: 0; 
+            width: 900px;
+            height: 600px;
+            background: white;
+            border-radius: 30px;
         }
         .close{
             transform: rotateX(180deg);
         }
         .card{
-            width: 180px;
-            height: 90px;
+            width: 150px;
+            height: 75px;
             transform-style: preserve-3d;
             position: relative;
             float: left;
@@ -81,7 +92,7 @@
         }
         #ans-btn{
             position: absolute;
-            top: 78%;
+            top: 82%;
             left: 50%;
             transform: translate(-50%, 0%);
             z-index: 100;
@@ -103,12 +114,15 @@
             border: 3px solid  rgb(255, 201, 77);
             font-weight: 900;
         }
+
     </style>
 </head>
 <body>
-    <div id="game">       
+    <div id="bg">
+        <div id="game">       
 
-    </div>
+        </div>
+    </div>  
     <div id="answer" class="animate__animated animate__zoomIn">       
         
     </div>
