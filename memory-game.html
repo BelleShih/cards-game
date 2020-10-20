@@ -93,6 +93,7 @@
             float: left;
             margin: 10px;
             transition: all 0.8s;
+            cursor: pointer;
         }
         .back{
             width: 100%;
@@ -195,23 +196,14 @@
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
-        }
-        .answercard-s{
-            width: 130px;
-            height: 130px;
-            float: left;
-            margin: 10px;
-            background-repeat: no-repeat;
-            background-size: contain;
-            /* position: absolute; */
-        }
+        }        
         #btn-review{
             width: 150px;
             height: 40px;
             border: 0;
             border-radius: 20px;
-            background: rgb(64, 97, 69);
-            color: rgb(199, 236, 214);
+            color: rgb(59, 87, 76);
+            background: rgb(156, 185, 168);            
             font-size: 15px;
             font-weight: 700;
             letter-spacing: 5px;
@@ -221,8 +213,8 @@
 
         }
         #btn-review:hover{
-            color: rgb(59, 87, 76);
-            background: rgb(156, 185, 168);
+            background: rgb(64, 97, 69);
+            color: rgb(199, 236, 214);
             font-weight: 900;
             cursor: pointer;
         }
@@ -231,21 +223,41 @@
             height: 40px;
             border: 0;
             border-radius: 20px;
-            background: rgb(175, 31, 6);
-            color: rgb(238, 213, 185);
+            background: rgb(245, 153, 137);
+            color: rgb(110, 29, 24);
             font-size: 15px;
-            font-weight: 700;
+            font-weight: 500;
             letter-spacing: 5px;
             position: absolute;
             top: 70%;
             left: 83%;
         }
         #btn-giveup:hover{
-            color: rgb(126, 102, 79);
-            background: rgb(255, 207, 188);
+            color: rgb(245, 215, 187);
+            background: rgb(167, 29, 5);
             font-weight: 900;
             cursor: pointer;
         }
+        .all-review{
+            width: 120px;
+            height: 40px;
+            background: rgb(199, 236, 214);
+            color: rgb(64, 97, 69);
+            border: 0;
+            padding: 0;
+            margin: 10px;
+            margin-left: 20px;
+            margin-left: 20px;
+            letter-spacing: 5px;
+            font-size: 18px;
+            float: left;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .all-review:hover{
+            color: rgb(199, 236, 214);
+            background: rgb(64, 97, 69);
+        }    
     </style>
 </head>
 <body>
@@ -275,8 +287,8 @@
 
         $('.card').remove()
         $('.close').remove()
-        $('.clear').remove()
-        $('.answercard-s').remove()
+        $('.clear').remove()        
+        $('.all-review').remove()
         $('#btn-easy').attr('disabled', true);
         $('#btn-hard').attr('disabled', true);
         $('#btn-review').attr('disabled', false);
@@ -351,6 +363,7 @@
         $('.card').remove()
         $('.close').remove()
         $('.clear').remove()
+        $('.all-review').remove()        
         $('.answercard-s').remove()
         $('#btn-hard').attr('disabled', true);
         $('#btn-easy').attr('disabled', true);
@@ -420,8 +433,25 @@
             }
         }) 
     })  
+    // 放棄這關
+    $('#btn-giveup').on('click', function(){
+        $('.card').remove()
+        $('.close').remove()
+        $('.clear').remove()
+        $('#btn-hard').attr('disabled', false);
+        $('#btn-easy').attr('disabled', false);
+        $('#btn-review').attr('disabled', false);
+    }) 
     
-    const anscards = 10
+    // 複習成語
+    const idiomEasy = [
+        "熟能生巧", "風聲鶴唳", "飲水思源", "言簡意賅", "雪中送炭", "望梅止渴", "興高采烈", "一舉兩得", "未雨綢繆", "滴水穿石"
+    ]
+    const idiomHard = [
+        "魑魅魍魎", "焚膏繼晷", "膠柱鼓瑟", "沆瀣一氣", "簞食壺漿", "空谷足音", "噬臍莫及", "怙惡不悛", "諱莫如深", "方枘圓鑿"
+    ]
+    const review = 10
+
     $('#btn-review').on('click', function(){
         $('.card').remove()
         $('.close').remove()
@@ -430,32 +460,38 @@
         $('#btn-easy').attr('disabled', false);
         $('#btn-review').attr('disabled', true);
 
-        for ( let i=0; i<anscards; i++ ) {
+        for ( let i=0; i<review; i++ ) {
             $('#game').append(`
-                <div class="answercard-s" style="background-image:url(./images/easy/c${ i+1 }.png)"></div>                
-            `)
+                 <input type="button" value="${idiomEasy[i]}" id="${i}" class="all-review">                
+             `)
+            $(`#${i}`).on('click', function(){ 
+                $('#answer').append(`
+                    <div class="answercard" style="background-image:url(./images/easy/c${i+1}.png")"></div>
+                    <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
+                `)
+                $('#ans-btn').on('click', function(){
+                    $('.answercard').remove()
+                    $('#ans-btn').remove()
+                })
+            }) 
         }
-
-        // $('#game').on('click', '.answercard-s', function(){
-        //     $('#answer').append(`
-        //         <div class="answercard" style="background-image:url(./images/hard/c${ i+1 }.png)"></div>
-        //         <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
-        //     `)
-        //     $('#ans-btn').on('click', function(){
-        //         $('.answercard').remove()
-        //         $('#ans-btn').remove()
-        //     })
-        // })
-
-    })
-    $('#btn-giveup').on('click', function(){
-        $('.card').remove()
-        $('.close').remove()
-        $('.clear').remove()
-        $('#btn-hard').attr('disabled', false);
-        $('#btn-easy').attr('disabled', false);
-        $('#btn-review').attr('disabled', false);
-    })    
+        for ( let j=0; j<review; j++ ) {
+            $('#game').append(`
+                 <input type="button" value="${idiomHard[j]}" id="${j+10}" class="all-review">                
+             `)
+            $(`#${j+10}`).on('click', function(){ 
+                $('#answer').append(`
+                    <div class="answercard" style="background-image:url(./images/hard/c${j+1}.png")"></div>
+                    <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
+                `)
+                $('#ans-btn').on('click', function(){
+                    $('.answercard').remove()
+                    $('#ans-btn').remove()
+                })
+            }) 
+        }            
+        
+    })       
     </script>
 </body>
 </html>
