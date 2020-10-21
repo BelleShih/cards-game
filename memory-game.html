@@ -265,7 +265,7 @@
 
         /* 時間紀錄 */
         #time{
-            width: 200px;
+            width: 210px;
             margin: auto;
             text-align: center;
             position: absolute;
@@ -289,7 +289,7 @@
             color: rgb(78, 68, 62);                     
         }
         #btn-start{
-            width: 60px;
+            width: 65px;
             height: 30px;
             border: 0;
             background: rgb(126, 102, 79);
@@ -329,8 +329,8 @@
             <p>學習時間紀錄</p>
             <div id="line"></div>
             <div id="text-time">0時0分0秒</div>
-            <input type="button" value="開始" id="btn-start">
-            <input type="button" value="暫停" id="btn-stop"> 
+            <input type="button" value="重新開始" id="btn-start">
+            <input type="button" value="停止" id="btn-stop"> 
             <input type="button" value="歸零" id="btn-over"> 
         </div>        
         <input type="button" value="放棄這關" id="btn-giveup">
@@ -351,8 +351,11 @@
 
         $('.card').remove()
         $('.close').remove()
-        $('.clear').remove()        
+        $('.clear').remove()
+        $('.card:not(.close)').remove()        
         $('.all-review').remove()
+        $('.answercard').remove()
+        $('#ans-btn').remove()        
         $('#btn-easy').attr('disabled', true);
         $('#btn-hard').attr('disabled', true);
         $('#btn-review').attr('disabled', false);
@@ -427,8 +430,10 @@
         $('.card').remove()
         $('.close').remove()
         $('.clear').remove()
-        $('.all-review').remove()        
-        $('.answercard-s').remove()
+        $('.card:not(.close)').remove()  
+        $('.all-review').remove() 
+        $('.answercard').remove()
+        $('#ans-btn').remove() 
         $('#btn-hard').attr('disabled', true);
         $('#btn-easy').attr('disabled', true);
         $('#btn-review').attr('disabled', false);
@@ -502,6 +507,9 @@
         $('.card').remove()
         $('.close').remove()
         $('.clear').remove()
+        $('.card:not(.close)').remove()  
+        $('.answercard').remove()
+        $('#ans-btn').remove() 
         $('#btn-hard').attr('disabled', false);
         $('#btn-easy').attr('disabled', false);
         $('#btn-review').attr('disabled', false);
@@ -558,6 +566,23 @@
     
     // 計時
     let setMin = 0
+    let timer = setInterval(() => {
+        setMin += 1
+        let hour = Math.floor( setMin / 3600 )
+        let min = Math.floor( Math.floor(setMin % 3600) / 60 )
+        let sec = setMin % 60
+        $('#text-time').text(`${hour}時 ${min}分 ${sec}秒`)
+
+        $('#btn-stop').on('click', function(){
+            clearTimeout(timer)
+        })
+        $('#btn-over').on('click', function(){
+            setMin = 0
+            $('#text-time').text('0時 0分 0秒')
+        })
+    }, 1000);
+
+        
     $('#btn-start').on('click', function(){
         let timer = setInterval(() => {
             setMin += 1
