@@ -129,6 +129,7 @@
             backface-visibility: hidden;
             
         }
+        /* 會跳出的解說卡片 */
         .answer{
             width: 600px;
             height: 600px;
@@ -169,7 +170,7 @@
         }
         #ans-btn:hover{
             color: rgb(37, 77, 61);
-            background: rgb(156, 185, 168); 
+            background: rgb(188, 233, 207); 
             /* border: 1px solid  rgb(255, 201, 77); */
             font-weight: 900;
         }
@@ -279,12 +280,12 @@
             height: 1px;
             background:  rgb(78, 68, 62);
             position: absolute;
-            top: 23%;
+            top: 35%;
             left: 5%;
         }
         #text-time{
             font-size: 25px;
-            line-height: 60px; 
+            line-height: 30px; 
             color: rgb(78, 68, 62);                     
         }
         #btn-start{
@@ -324,7 +325,8 @@
         <div id="logo"></div>
         <input type="button" value="基礎入門" id="btn-easy">
         <input type="button" value="進階學習" id="btn-hard"> 
-        <div id="time">學習時間紀錄
+        <div id="time">
+            <p>學習時間紀錄</p>
             <div id="line"></div>
             <div id="text-time">0時0分0秒</div>
             <input type="button" value="開始" id="btn-start">
@@ -554,6 +556,7 @@
         } 
     })   
     
+    // 計時
     let setMin = 0
     $('#btn-start').on('click', function(){
         let timer = setInterval(() => {
