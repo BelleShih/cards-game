@@ -491,7 +491,7 @@
                     $('.card:not(.close)').fadeTo(800, 0).addClass('clear')
                         setTimeout(() => {
                             $('#answer').append(`
-                                <div class="answercard" style="background-image:url(./images/hard/d${ $('.card:not(.close)').eq(0).attr('data-card') }.png)"></div>
+                                <div class="answercard" style="background-image:url(./images/hard/c${ $('.card:not(.close)').eq(0).attr('data-card') }.png)"></div>
                                 <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
                                 <audio src="./audio/hard/d${ $('.card:not(.close)').eq(0).attr('data-card') }.mp3" autoplay id="music"></audio>
                             `)
@@ -581,7 +581,7 @@
              `)
             $(`#${j+10}`).on('click', function(){ 
                 $('#answer').append(`
-                    <div class="answercard" style="background-image:url(./images/hard/d${j+1}.png")"></div>
+                    <div class="answercard" style="background-image:url(./images/hard/c${j+1}.png")"></div>
                     <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
                     <audio src="./audio/hard/d${j+1}.mp3" autoplay id="music"></audio>
                 `)
