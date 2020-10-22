@@ -337,11 +337,12 @@
             <input type="button" value="歸零" id="btn-over"> 
         </div>        
         <input type="button" value="放棄這關" id="btn-giveup">
-        <input type="button" value="複習成語" id="btn-review">      
+        <input type="button" value="複習成語" id="btn-review">
+              
     </div> 
      
 
-    <div id="answer" class="animate__animated animate__zoomIn">     
+    <div id="answer">     
     
     </div>
     <div id="alert"></div>
@@ -349,6 +350,7 @@
     <script>
 
         const totalCards = 20
+        
 // 簡易版
     $('#btn-easy').on('click', function(){
 
@@ -362,6 +364,8 @@
         $('#btn-easy').attr('disabled', true);
         $('#btn-hard').attr('disabled', true);
         $('#btn-review').attr('disabled', false);
+
+        
         
         for( let i=0; i < totalCards/2; i++ ) {
             $('#game').append(`
@@ -403,10 +407,12 @@
                             $('#answer').append(`
                                 <div class="answercard" style="background-image:url(./images/easy/c${ $('.card:not(.close)').eq(0).attr('data-card') }.png)"></div>
                                 <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
+                                <audio src="./audio/easy/d${ $('.card:not(.close)').eq(0).attr('data-card') }.mp3" autoplay id="music"></audio>
                             `)
                             $('#ans-btn').on('click', function(){
                                 $('.answercard').remove()
                                 $('#ans-btn').remove()
+                                $('#music').remove()
                             })
                         }, 1000);
                 }
@@ -487,10 +493,12 @@
                             $('#answer').append(`
                                 <div class="answercard" style="background-image:url(./images/hard/c${ $('.card:not(.close)').eq(0).attr('data-card') }.png)"></div>
                                 <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
+                                <audio src="./audio/hard/d${ $('.card:not(.close)').eq(0).attr('data-card') }.mp3" autoplay id="music"></audio>
                             `)
                             $('#ans-btn').on('click', function(){
                                 $('.answercard').remove()
                                 $('#ans-btn').remove()
+                                $('#music').remove()
                             })
                         }, 1000);
                 }
@@ -558,10 +566,12 @@
                 $('#answer').append(`
                     <div class="answercard" style="background-image:url(./images/easy/c${i+1}.png")"></div>
                     <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
+                    <audio src="./audio/easy/d${i+1}.mp3" autoplay id="music"></audio>
                 `)
                 $('#ans-btn').on('click', function(){
                     $('.answercard').remove()
                     $('#ans-btn').remove()
+                    $('#music').remove()
                 })
             }) 
         }
@@ -573,10 +583,12 @@
                 $('#answer').append(`
                     <div class="answercard" style="background-image:url(./images/hard/c${j+1}.png")"></div>
                     <input type="button" value="我又學到了! 繼續挑戰" id="ans-btn">
+                    <audio src="./audio/hard/d${j+1}.mp3" autoplay id="music"></audio>
                 `)
                 $('#ans-btn').on('click', function(){
                     $('.answercard').remove()
                     $('#ans-btn').remove()
+                    $('#music').remove()
                 })
             }) 
         } 
