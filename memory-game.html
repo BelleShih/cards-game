@@ -417,12 +417,17 @@
 
             if( $('.clear').length == totalCards) {
                 setTimeout(() => {
-                    alert('恭喜你完成所有挑戰！')
+                    alert('恭喜你完成挑戰！試試看進階的吧!')
                     $('.card').remove()
                     $('.close').remove()
                     $('.clear').remove()
                     $('.card:not(.close)').remove()
                     $('#btn-easy').attr('disabled', false);
+                    $('#btn-hard').attr('disabled', false);
+                    $('#game').remove()
+                    $('#round').append(`
+                        <div id="game"></div>        
+                    `)
                 } ,2000);
             }
         }) 
@@ -434,10 +439,10 @@
         $('.card').remove()
         $('.close').remove()
         $('.clear').remove()
-        $('.card:not(.close)').remove()  
-        $('.all-review').remove() 
+        $('.card:not(.close)').remove()        
+        $('.all-review').remove()
         $('.answercard').remove()
-        $('#ans-btn').remove() 
+        $('#ans-btn').remove()     
         $('#btn-hard').attr('disabled', true);
         $('#btn-easy').attr('disabled', true);
         $('#btn-review').attr('disabled', false);
@@ -496,12 +501,16 @@
 
             if( $('.clear').length == totalCards) {
                 setTimeout(() => {
-                    alert('恭喜你完成所有挑戰！')
+                    alert('恭喜你完成所有挑戰！一起複習成語吧!')
                     $('.card').remove()
                     $('.close').remove()
                     $('.clear').remove()
                     $('#btn-easy').attr('disabled', false);
                     $('#btn-hard').attr('disabled', false);
+                    $('#game').remove()
+                    $('#round').append(`
+                        <div id="game"></div>        
+                    `)
                 } ,2000);
             }
         }) 
@@ -518,7 +527,7 @@
         $('#btn-hard').attr('disabled', false);
         $('#btn-easy').attr('disabled', false);
         $('#btn-review').attr('disabled', false);
-
+        
         $('#round').append(`
             <div id="game"></div>        
         `)
