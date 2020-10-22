@@ -308,7 +308,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        #btn-over{
+        #btn-zero{
             width: 60px;
             height: 30px;
             border: 0;
@@ -334,7 +334,7 @@
             <div id="text-time">0時0分0秒</div>
             <input type="button" value="重新開始" id="btn-start">
             <input type="button" value="停止" id="btn-stop"> 
-            <input type="button" value="歸零" id="btn-over"> 
+            <input type="button" value="歸零" id="btn-zero"> 
         </div>        
         <input type="button" value="放棄這關" id="btn-giveup">
         <input type="button" value="複習成語" id="btn-review">
@@ -606,7 +606,8 @@
         $('#btn-stop').on('click', function(){
             clearTimeout(timer)
         })
-        $('#btn-over').on('click', function(){
+        $('#btn-zero').on('click', function(){
+            clearTimeout(timer)
             setMin = 0
             $('#text-time').text('0時 0分 0秒')
         })
@@ -625,7 +626,8 @@
         $('#btn-stop').on('click', function(){
             clearTimeout(timer)
         })
-        $('#btn-over').on('click', function(){
+        $('#btn-zero').on('click', function(){
+            clearTimeout(timer)
             setMin = 0
             $('#text-time').text('0時 0分 0秒')
         })
