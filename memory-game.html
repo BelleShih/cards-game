@@ -173,6 +173,7 @@
             background: rgb(188, 233, 207); 
             /* border: 1px solid  rgb(255, 201, 77); */
             font-weight: 900;
+            cursor: pointer;
         }
         #logo{
             width: 200px;
@@ -296,6 +297,7 @@
             color: rgb(238, 213, 185);
             border-radius: 5px;
             margin-top: 20px;
+            cursor: pointer;
         }
         #btn-stop{
             width: 60px;
@@ -304,6 +306,7 @@
             background: rgb(126, 102, 79);
             color: rgb(238, 213, 185);
             border-radius: 5px;
+            cursor: pointer;
         }
         #btn-over{
             width: 60px;
@@ -312,16 +315,16 @@
             background: rgb(126, 102, 79);
             color: rgb(238, 213, 185);
             border-radius: 5px;
+            cursor: pointer;
         }    
     </style>
 </head>
 <body>
     <div id="bg">
         <div id="border"></div>
-        <div id="game">       
-
+        <div id="round">
+            <div id="game"></div>
         </div>
-         
         <div id="logo"></div>
         <input type="button" value="基礎入門" id="btn-easy">
         <input type="button" value="進階學習" id="btn-hard"> 
@@ -359,7 +362,7 @@
         $('#btn-easy').attr('disabled', true);
         $('#btn-hard').attr('disabled', true);
         $('#btn-review').attr('disabled', false);
-
+        
         for( let i=0; i < totalCards/2; i++ ) {
             $('#game').append(`
             
@@ -418,6 +421,7 @@
                     $('.card').remove()
                     $('.close').remove()
                     $('.clear').remove()
+                    $('.card:not(.close)').remove()
                     $('#btn-easy').attr('disabled', false);
                 } ,2000);
             }
@@ -509,10 +513,15 @@
         $('.clear').remove()
         $('.card:not(.close)').remove()  
         $('.answercard').remove()
+        $('#game').remove()
         $('#ans-btn').remove() 
         $('#btn-hard').attr('disabled', false);
         $('#btn-easy').attr('disabled', false);
         $('#btn-review').attr('disabled', false);
+
+        $('#round').append(`
+            <div id="game"></div>        
+        `)
     }) 
     
     // 複習成語
